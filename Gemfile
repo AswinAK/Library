@@ -44,3 +44,11 @@ gem 'turbolinks'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem "activerecord", "< 5.0.0"
+
+group :production do
+  gem 'pg', '0.18.4'
+end
+
+group :development, :test do
+  gem 'byebug',  '9.0.0', platform: :mri
+end
