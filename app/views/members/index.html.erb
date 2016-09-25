@@ -1,0 +1,35 @@
+<%= link_to("Back to previous page", {:controller => 'access', :action => 'admin_view'}, :class => 'back-link') %>
+<h1>Manage Members</h1>
+<!--<% if !flash[:notice].blank? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+-->
+<div class="member index">
+
+  <p>List of All Members</p>
+  <br></br>
+  <style>
+    table, th, td{
+      border: 1px solid black;
+    }
+  </style>
+  <table style = "width:100%" class="listing" summary="Subject list">
+    <tr class="header">
+
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <% @members.each do |member| %>
+        <tr>
+          <td><%= member.name %></td>
+          <td><%= member.email_id %></td>
+          <td class="actions">
+            <%= link_to("Delete", {:controller => 'room',:action => 'delete', :id => member.id}) %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

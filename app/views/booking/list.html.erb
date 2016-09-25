@@ -1,0 +1,37 @@
+<%= link_to("<< Back to List", {:action => 'search'}, :class => 'back-link') %>
+<h1>Search Results</h1>
+<!--<% if !flash[:notice].blank? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+-->
+<div class="available rooms index">
+
+
+
+  <p>List of Available Rooms</p>
+  <br></br>
+  <style>
+    table, th, td{
+      border: 1px solid black;
+    }
+  </style>
+  <table style = "width:100%" class="listing" summary="Subject list">
+    <tr class="header">
+
+      <th>Room Number</th>
+      <th> Actions</th>
+    </tr>
+    <% @rooms.each do |room| %>
+        <tr>
+
+          <td><%= room.room_number %></td>
+
+          <td class="actions">
+            <%= link_to("Show Availability", {:action => 'show_availability', :id => room.room_number}, :class => 'show availability') %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

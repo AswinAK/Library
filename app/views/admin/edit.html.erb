@@ -1,0 +1,23 @@
+<%= link_to("Back to previous page", {:controller => 'access', :action => 'admin_view'}, :class => 'back-link') %>
+
+<div class="profile edit">
+  <h2>Edit Profile Details</h2>
+  <%= form_for(:admin, :url => {:action => 'update', :id => @admin.id}) do |f| %>
+    <table summary="Subject form fields">
+      <tr>
+        <th>Name</th>
+        <td><%= f.text_field(:name) %></td>
+      </tr>
+
+      <tr style="display: none;">
+        <th>ID</th>
+        <td><%= f.text_field(:id) %></td>
+      </tr>
+    </table>
+
+    <div class="form-buttons">
+      <%= submit_tag("Save changes") %>
+    </div>
+
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+<%= link_to("<< Back to List", {:controller => 'access', :action => 'member_view'}, :class => 'back-link') %>
+
+<div class="subjects edit">
+  <h2>Search Rooms</h2>
+
+  <%= form_for(:room_search, :url => {:action => 'list',:controller => 'booking'}) do |f| %>
+      <p>Location </p>
+      <%=  select_tag "location", "<option> </option>
+                               <option >Hill</option>
+                               <option>Hunt</option>".html_safe %>
+
+      </br>
+
+      <p> Capacity </p>
+
+      <%=  select_tag "capacity", "<option value = ""></option>
+                             <option value = 4>Small</option>
+                             <option value = 6>Medium</option>
+                             <option value = 12>Large</option>".html_safe %>
+      <br></br>
+
+      <div class="form-buttons">
+        <%= submit_tag("Search Room") %>
+      </div>
+
+  <% end %>
+</div>

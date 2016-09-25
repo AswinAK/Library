@@ -1,0 +1,14 @@
+<h1>Booking Details Confirmation</h1>
+
+
+<p>Room: <%=  params[:id]     %></p>
+<p>Date: <%=     params[:id4]  %></p>
+<p>Time: <%=   params[:id3]    %></p>
+
+
+<li><%= link_to("YES",:action => 'confirmbooking', :id => params[:id],
+                :id2 => params[:id2],
+                :id3 => params[:id3],
+                :id4 => params[:id4],
+                data: {:confirm => "Are you sure?"}) %></li>
+<li><%=link_to("NO", :action => 'show_availability'+'/'+params[:id])%></li>
