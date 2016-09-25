@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -8,7 +9,7 @@ gem 'rake', '~> 11.3'
 gem 'heroku', '~> 3.43', '>= 3.43.12'
 
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.18'
+
 
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.0'
@@ -51,8 +52,10 @@ gem "activerecord", "< 5.0.0"
 
 group :production do
   gem 'pg', '0.18.4'
+  gem 'rails_12factor', '~> 0.0.3'
 end
 
 group :development, :test do
+  gem 'mysql2', '~> 0.3.18'
   gem 'byebug',  '9.0.0', platform: :mri
 end
