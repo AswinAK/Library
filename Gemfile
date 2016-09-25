@@ -5,6 +5,8 @@ gem 'rails', '4.0.0'
 
 gem 'rake', '~> 11.3'
 
+gem 'heroku', '~> 3.43', '>= 3.43.12'
+
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.18'
 
