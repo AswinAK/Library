@@ -15,7 +15,7 @@ gem 'heroku', '~> 3.43', '>= 3.43.12'
 #gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 2.7', '>= 2.7.2'
 
 # Use CoffeeScript for .js.coffee assets and views
 #gem 'coffee-rails', '~> 4.0.0'
@@ -34,7 +34,7 @@ gem 'turbolinks'
 
 #group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-#  gem 'sdoc', require: false
+ # gem 'sdoc', require: false
 #end
 
 # Use ActiveModel has_secure_password
