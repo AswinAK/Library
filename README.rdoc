@@ -1,8 +1,9 @@
 == README
 
 ADMIN CREDENTIALS:
-Username: admin@ncsu.edu
-Password: ncsu
+*Username: admin@ncsu.edu
+
+*Password: ncsu
 
 
 
