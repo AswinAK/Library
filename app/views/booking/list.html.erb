@@ -21,12 +21,16 @@
     <tr class="header">
 
       <th>Room Number</th>
-      <th> Actions</th>
+      <th>Location</th>
+      <th>Size</th>
+      <th>Actions</th>
     </tr>
     <% @rooms.each do |room| %>
         <tr>
 
           <td><%= room.room_number %></td>
+          <td><%= room.building %></td>
+          <td><%= room.size %></td>
 
           <td class="actions">
             <%= link_to("Show Availability", {:action => 'show_availability', :id => room.room_number}, :class => 'show availability') %>

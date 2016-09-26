@@ -24,10 +24,12 @@ class AccessController < ApplicationController
     found_user = Admin.where(:email_id => params[:username]).first
     if found_user
       authorized_user = found_user.authenticate(params[:password])
+      session[:admin]=true
     else # if found_user
       found_user = Member.where(:email_id => params[:username]).first
       if found_user
       authorized_user = found_user.authenticate(params[:password])
+      session[:admin]=false
     end
     end
 

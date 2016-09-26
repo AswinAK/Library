@@ -3,6 +3,15 @@ class BookingController < ApplicationController
   end
 
   def book
+    booking_status = params[:id5]
+    puts "Booking status is "+booking_status;
+    redirect_string = "show_availability/"+params[:id]
+    #flash[:success] = "Your booking is confirmed":id
+
+    if booking_status=="booked"
+      redirect_to action: redirect_string
+    end
+
 
   end
 
@@ -28,7 +37,21 @@ class BookingController < ApplicationController
     puts "Location: "+params[:location]
     puts "Size: "+params[:capacity]
 
-    @rooms =Room.where(building: params[:location]).where(size: params[:capacity])
+    loc = params[:location]
+    cap = params[:capacity]
+
+    if(cap.size==0&&loc.size==0)
+      @rooms = Room.all
+    elsif(cap.size!=0&&loc.size==0)
+      @rooms =Room.where(size: params[:capacity])
+    elsif(cap.size==0&&loc.size!=0)
+      @rooms =Room.where(building: params[:location])
+    else
+      @rooms =Room.where(building: params[:location]).where(size: params[:capacity])
+    end
+
+
+
   end
 
   def show_availability
@@ -60,6 +83,38 @@ class BookingController < ApplicationController
       end
     end
     puts "Availability Array "+@slots_array.inspect
+
+  end
+
+
+  def view_bookings
+    puts "in VIEW_BOOKINGS, user id is "+session[:userid].to_s
+    @bookings = Booking.where(email_id: session[:userid])
+  end
+
+  def delete
+    del_id = params[:id]
+    puts "deleting booking ID: "+del_id.to_s
+    b= Booking.find_by(id: del_id)
+    b.destroy
+    redirect_to action: "view_bookings/"
+
+  end
+
+
+
+  def confirmbooking
+
+  booking = Booking.new
+
+  booking.email_id = session[:admin]? params[:name] : params[:id2]
+  booking.room_number = params[:id]
+  booking.slot = params[:id3]
+  booking.date = params[:id4];
+  booking.save
+  redirect_string = "show_availability/"+params[:id]
+  #flash[:success] = "Your booking is confirmed":id
+  redirect_to action: redirect_string
 
   end
 

@@ -35,11 +35,13 @@
 
           <td><%=@current_date+i%></td>
           <td>
-            <%=link_to(@slots_array[i*8][:status], :action => 'book',:controller=> 'booking',
+            <%=
+            link_to(@slots_array[i*8][:status], :action => 'book',:controller=> 'booking',
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8][:slot],
-                       :id4 =>@slots_array[i*8][:date]
+                       :id4 =>@slots_array[i*8][:date],
+                       :id5 =>@slots_array[i*8][:status]
                )%>
           </td>
 
@@ -49,7 +51,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+1][:slot],
-                       :id4 =>@slots_array[i*8+1][:date]
+                       :id4 =>@slots_array[i*8+1][:date],
+                       :id5 =>@slots_array[i*8+1][:status]
                )%>
           </td>
 
@@ -59,7 +62,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+2][:slot],
-                       :id4 =>@slots_array[i*8+2][:date]
+                       :id4 =>@slots_array[i*8+2][:date],
+                       :id5 =>@slots_array[i*8+2][:status]
                )%>
           </td>
 
@@ -69,7 +73,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+3][:slot],
-                       :id4 =>@slots_array[i*8+3][:date]
+                       :id4 =>@slots_array[i*8+3][:date],
+                       :id5 =>@slots_array[i*8+3][:status]
                )%>
           </td>
 
@@ -78,7 +83,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+4][:slot],
-                       :id4 =>@slots_array[i*8+4][:date]
+                       :id4 =>@slots_array[i*8+4][:date],
+                       :id5 =>@slots_array[i*8+4][:status]
                )%>
           </td>
 
@@ -87,7 +93,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+5][:slot],
-                       :id4 =>@slots_array[i*8+5][:date]
+                       :id4 =>@slots_array[i*8+5][:date],
+                       :id5 =>@slots_array[i*8+5][:status]
                )%>
           </td>
 
@@ -97,7 +104,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+6][:slot],
-                       :id4 =>@slots_array[i*8+6][:date]
+                       :id4 =>@slots_array[i*8+6][:date],
+                       :id5 =>@slots_array[i*8+6][:status]
                )%>
           </td>
 
@@ -107,7 +115,8 @@
                        :id => @current_room_id,
                        :id2=> @current_user_id,
                        :id3 => @slots_array[i*8+7][:slot],
-                       :id4 =>@slots_array[i*8+7][:date]
+                       :id4 =>@slots_array[i*8+7][:date],
+                       :id5 =>@slots_array[i*8+7][:status]
                )%>
           </td>
 

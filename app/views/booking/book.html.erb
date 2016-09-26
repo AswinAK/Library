@@ -1,14 +1,42 @@
-<h1>Booking Details Confirmation</h1>
+<%= link_to("Back to previous page", {:controller => 'booking', :action => 'show_availability'+'/'+params[:id]}, :class => 'back-link') %>
 
-
-<p>Room: <%=  params[:id]     %></p>
-<p>Date: <%=     params[:id4]  %></p>
-<p>Time: <%=   params[:id3]    %></p>
-
-
-<li><%= link_to("YES",:action => 'confirmbooking', :id => params[:id],
+<div class="confirmation">
+ <h1>Booking Details Confirmation</h1>
+  <%= form_for(:booking, :url => {:action => 'confirmbooking', :id => params[:id],
                 :id2 => params[:id2],
                 :id3 => params[:id3],
                 :id4 => params[:id4],
-                data: {:confirm => "Are you sure?"}) %></li>
-<li><%=link_to("NO", :action => 'show_availability'+'/'+params[:id])%></li>
+                }) do |f| %>
+
+    <table summary="Subject form fields">
+      <tr>
+
+        <%if session[:admin] %>
+        <td>Name:</td>
+        <td><%= text_field_tag(:name) %></td>
+        <% end %>
+      </tr>
+      <tr>
+      	<td>Room: </td>
+      	<td><%=params[:id]   %></td>
+      </tr>
+      <tr>
+         <td> Date: </td>
+         <td><%=params[:id4]  %></td>
+     </tr>
+     <% time_slots = {1=>"7AM to 9AM",2=>"9AM to 11AM",3=>"11AM to 1PM",4=>"1PM to 3PM",5=>"3PM to 5PM",6=>"5PM to 7PM",7=>"7PM to  9PM", 8=>"9PM to 11PM"}
+	puts time_slots[params[:id3]]
+
+    %>
+    <tr>
+    	<td>Time: </td>
+    	<td><%=   time_slots[params[:id3].to_i]    %><td>
+    </tr>
+    </table>
+
+    <div class="form-buttons">
+      <%= submit_tag("Confirm") %>
+    </div>
+
+  <% end %>
+</div>

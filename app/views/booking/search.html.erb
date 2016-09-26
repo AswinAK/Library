@@ -1,4 +1,4 @@
-<%= link_to("<< Back to List", {:controller => 'access', :action => 'member_view'}, :class => 'back-link') %>
+<%= link_to("<< Back to List", {:controller => 'access', :action => session[:admin]? 'admin_view' : 'member_view'}, :class => 'back-link') %>
 
 <div class="subjects edit">
   <h2>Search Rooms</h2>

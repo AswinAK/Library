@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20160925192155) do
   create_table "bookings", force: true do |t|
     t.string   "email_id"
     t.string   "room_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "slot"
     t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "members", force: true do |t|
