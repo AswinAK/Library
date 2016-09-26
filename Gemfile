@@ -6,6 +6,8 @@ gem 'rails', '4.2.1'
 
 gem 'rake', '~> 11.3'
 
+gem 'mysql2', '~> 0.3.18'
+
 gem 'heroku', '~> 3.43', '>= 3.43.12'
 
 
@@ -23,6 +25,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -46,7 +50,7 @@ gem 'jbuilder', '~> 1.2'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem "activerecord", "< 5.0.0"
+gem 'activerecord', "<5.0.0"
 
 group :production do
   gem 'pg', '0.18.4'
@@ -54,6 +58,6 @@ group :production do
 end
 
 group :development, :test do
-  gem 'mysql2', '~> 0.3.18'
+  
   gem 'byebug',  '9.0.0', platform: :mri
 end
