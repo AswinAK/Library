@@ -52,10 +52,11 @@ class AccessController < ApplicationController
   end
 end
 
+
 def logout
   # mark user as logged out
-  session[:user_id] = nil
-  session[:username] = nil
+
+  reset_session
   redirect_to(:action => "login")
 end
 
