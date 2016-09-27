@@ -45,7 +45,7 @@ class AdminController < ApplicationController
   end
 
   def delete
-    Admin.find_by(params[:id]).destroy
+    Admin.delete(Admin.where(id: params[:id]))
     redirect_to(:action => 'index')
   end
 
