@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
 
-
+ before_filter :authenticateUser!
+  
   def index
     current_user = session[:userid]
     exclude_ids = [current_user,30]
