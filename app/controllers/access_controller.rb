@@ -1,4 +1,7 @@
 class AccessController < ApplicationController
+ 
+  before_filter :authenticateUser!, :except => ["login","index","attempt_login"]
+  
   def index
   end
 
