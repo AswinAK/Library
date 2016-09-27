@@ -1,4 +1,6 @@
 class BookingController < ApplicationController
+  
+  before_filter :authenticateUser!
   def index
   end
 
