@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  
+  before_filter :authenticateUser!, except: ["new","create"]
   # GET /members
   def index
     @members = Member.all
