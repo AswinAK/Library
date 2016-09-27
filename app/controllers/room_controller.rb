@@ -1,6 +1,6 @@
 class RoomController < ApplicationController
 
-
+  before_filter :authenticateUser!
   def index
     @rooms = Room.all
   end
