@@ -14,7 +14,6 @@ class MembersController < ApplicationController
 
   def edit
     current_user = session[:userid]
-    puts "Hello Sahib " + " " + current_user.to_s
     @member = Member.find_by(id: current_user)
   end
 
