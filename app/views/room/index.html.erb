@@ -9,10 +9,9 @@
 <div class="room index">
 
   <%= link_to("Create New Room", {:action => 'new'}, :class => 'action new') %>
-  <br></br>
 
-  <p>List of All Rooms</p>
-  <br></br>
+  <br>
+  <br>
   <style>
     table, th, td{
       border: 1px solid black;
@@ -33,6 +32,9 @@
           <td><%= room.size %></td>
           <td class="actions">
             <%= link_to("Delete", {:controller => 'room',:action => 'delete', :id => room.id}) %>
+            <span class="WhiteSpace">  </span>
+            <%= link_to("View Bookings",{:controller => 'booking',:action => 'show', :id => room.room_number})%>
+
           </td>
         </tr>
     <% end %>

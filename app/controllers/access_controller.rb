@@ -28,6 +28,7 @@ class AccessController < ApplicationController
     if found_user
       authorized_user = found_user.authenticate(params[:password])
       session[:admin]=true
+      puts "Login successful"
     else # if found_user
       found_user = Member.where(:email_id => params[:username]).first
       if found_user
@@ -40,7 +41,7 @@ class AccessController < ApplicationController
   if authorized_user
     # mark user as logged in
     session[:userid] = authorized_user.id
-    session[:userName] = authorized_user.name
+    session[:userName] = authorized_user.first_name
     if(authorized_user.class == Admin)
     redirect_to(:action => 'admin_view')
     else

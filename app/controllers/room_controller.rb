@@ -23,7 +23,7 @@ class RoomController < ApplicationController
   end
 
   def delete
-    Room.find_by(params[:id]).destroy
+    Room.find_by(:id=>params[:id]).destroy
     redirect_to(:action => 'index')
   end
 

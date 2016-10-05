@@ -14,7 +14,7 @@ development:
   database: LibraryManagement
   pool: 5
   username: root
-  password: secret
+  password: Rkb@0208_1994
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

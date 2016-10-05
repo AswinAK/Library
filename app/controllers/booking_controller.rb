@@ -4,16 +4,28 @@ class BookingController < ApplicationController
   def index
   end
 
+  def show
+    #show all the bookings of  a particular room
+    @all_bookings=Booking.where(:room_number=>params[:id])
+    @showing_for_room=params[:id]
+    puts "All bookings: #{@all_bookings}"
+  end
+
   def book
-    booking_status = params[:id5]
-    puts "Booking status is "+booking_status;
-    redirect_string = "show_availability/"+params[:id]
-    #flash[:success] = "Your booking is confirmed":id
-
-    if booking_status=="booked"
-      redirect_to action: redirect_string
+    @booking_status = params[:id5]
+    if(@booking_status=="booked")
+      @slot=params[:id3]
+      @date=params[:id4]
+      @room_num=params[:id]
+      booking=Booking.where(:slot => @slot,:date => @date, :room_number =>@room_num).first
+      puts booking.inspect
+      @booking_id=booking.id
+      @booking_member_id=booking.email_id
+      @booking_member_name= Member.find_by(:id=>@booking_member_id).first_name
+      puts "Booking status is "+@booking_status
+      puts "Member name" + @booking_member_name
+      puts session[:admin]
     end
-
 
   end
 
@@ -22,34 +34,72 @@ class BookingController < ApplicationController
   end
 
   def confirmbooking
-    puts "In confirmbooking: P1 is "+params[:id].to_s
-    booking = Booking.new
-    booking.email_id = params[:id2]
-    booking.room_number = params[:id]
-    booking.slot = params[:id3]
-    booking.date = params[:id4];
-    booking.save
-    redirect_string = "show_availability/"+params[:id]
-    #flash[:success] = "Your booking is confirmed":id
-    redirect_to action: redirect_string
+    if(session[:admin])
+
+
+      foundMember=Member.find_by(:email_id=> params[:name])
+      #search for the mail id in the database to see if the user exists:
+      if(Member.find_by(:email_id=> params[:name]).present?)
+        #delete the old booking first BEFORE saving the new booking with the new user that admin entered
+        puts "This booking id will be deleted :"+params[:booking_id]
+        @deleted_booking=Booking.find_by(:id=>params[:booking_id]).destroy
+        puts @deleted_booking
+        #adding the booking
+        booking = Booking.new
+        booking.email_id = foundMember.id
+        booking.room_number = params[:id]
+        booking.slot = params[:id3]
+        booking.date = params[:id4]
+        booking.save
+
+        redirect_to :action=>"show_availability", :id=>params[:id]
+
+      else
+        flash[:notice]="No such user exists, try valid email id"
+        bookedRoom = Booking.find_by(:id=>params[:id])
+        redirect_to :action => "book", :id=>params[:id], :id2=>params[:id2], :id3=>params[:id3], :id4=>params[:id4], :id5=>"available"
+
+      end
+    else
+      booking = Booking.new
+      booking.email_id = params[:id2]
+      booking.room_number = params[:id]
+      booking.slot = params[:id3]
+      booking.date = params[:id4]
+      booking.save
+
+      redirect_to :action=>"show_availability", :id=>params[:id]
+
+    end
+
 
   end
-
   def list
-    puts "Location: "+params[:location]
-    puts "Size: "+params[:capacity]
-
-    loc = params[:location]
-    cap = params[:capacity]
-
-    if(cap.size==0&&loc.size==0)
+    loc = params[:location].to_s
+    cap = params[:capacity].to_s
+    room= params[:room_number_to_search].to_s
+    puts params[:location]
+    puts params[:capacity]
+    puts params[:room_number_to_search]
+    if(cap.size==0&&loc.size==0&&room.size==0)
       @rooms = Room.all
-    elsif(cap.size!=0&&loc.size==0)
-      @rooms =Room.where(size: params[:capacity])
-    elsif(cap.size==0&&loc.size!=0)
-      @rooms =Room.where(building: params[:location])
+
+    elsif(cap.size!=0&&loc.size==0&&room.size==0)
+      @rooms =Room.where(:size=> params[:capacity])
+    elsif(cap.size==0&&loc.size!=0&&room.size==0)
+      @rooms =Room.where(:building=> params[:location])
+    elsif(cap.size==0&&loc.size==0&&room.size!=0)
+      @rooms =Room.where(:room_number=> params[:room_number_to_search])
+
+    elsif(cap.size!=0&&loc.size!=0&&room.size==0)
+      @rooms =Room.where(:building=>params[:location]).where(:size=> params[:capacity])
+    elsif(cap.size==0&&loc.size!=0&&room.size!=0)
+      @rooms =Room.where(:room_number=> params[:room_number_to_search]).where(:building=>params[:location])
+    elsif(cap.size!=0&&loc.size==0&&room.size!=0)
+      @rooms =Room.where(:room_number=> params[:room_number_to_search]).where(:size=> params[:capacity])
+
     else
-      @rooms =Room.where(building: params[:location]).where(size: params[:capacity])
+      @rooms =Room.where(:room_number=> params[:room_number_to_search]).where(:size=> params[:capacity]).where(:building=>params[:location])
     end
 
 
@@ -90,8 +140,9 @@ class BookingController < ApplicationController
 
 
   def view_bookings
-    puts "in VIEW_BOOKINGS, user id is "+session[:userid].to_s
-    @bookings = Booking.where(email_id: session[:userid])
+    puts "in VIEW_BOOKINGS, user id is "+params[:id].to_s
+    @bookings = Booking.where(email_id: params[:id])
+    @member_id= params[:id]
   end
 
   def delete
@@ -99,25 +150,7 @@ class BookingController < ApplicationController
     puts "deleting booking ID: "+del_id.to_s
     b= Booking.find_by(id: del_id)
     b.destroy
-    redirect_to action: "view_bookings/"
+    redirect_to action: "view_bookings" ,:id=>params[:member_id]
 
   end
-
-
-
-  def confirmbooking
-
-  booking = Booking.new
-
-  booking.email_id = session[:admin]? params[:name] : params[:id2]
-  booking.room_number = params[:id]
-  booking.slot = params[:id3]
-  booking.date = params[:id4];
-  booking.save
-  redirect_string = "show_availability/"+params[:id]
-  #flash[:success] = "Your booking is confirmed":id
-  redirect_to action: redirect_string
-
-  end
-
 end

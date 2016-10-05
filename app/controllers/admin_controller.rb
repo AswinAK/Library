@@ -8,7 +8,9 @@ class AdminController < ApplicationController
     @admins = Admin.where('id NOT IN (:ids)', ids: exclude_ids)
   end
 
-
+  def show
+    @admin=Admin.find_by(:id=>params[:id])
+  end
   def new
     @admin = Admin.new
   end
@@ -54,7 +56,7 @@ private
       # same as using "params[:subject]", except that it:
       # - raises an error if :subject is not present
       # - allows listed attributes to be mass-assigned
-      params.require(:admin).permit(:name,:email_id, :password, :password_confirmation,:created_at)
+      params.require(:admin).permit(:id, :first_name,:last_name,:dob,:gender,:email_id,:password, :password_confirmation,:created_at)
   end
 
 end

@@ -1,4 +1,4 @@
-<%= link_to("Back to previous page", session[:admin]?{:controller => 'members', :action => 'index'}:{:controller => 'access', :action => 'member_view'}, :class => 'back-link') %>
+<%= link_to("Back to previous page", {:controller => 'room', :action => 'index'}, :class => 'back-link') %>
 <%stylesheet_link_tag('application',:media=>'all')%>
 <h1>View Bookings</h1>
 <!--<% if !flash[:notice].blank? %>
@@ -8,11 +8,11 @@
 <% end %>
 -->
 <% time_slots = {1=>"7AM to 9AM",2=>"9AM to 11AM",3=>"11AM to 1PM",
-  4=>"1PM to 3PM",5=>"3PM to 5PM",6=>"5PM to 7PM",7=>"7PM to  9PM", 8=>"9PM to 11PM"}
+                 4=>"1PM to 3PM",5=>"3PM to 5PM",6=>"5PM to 7PM",7=>"7PM to  9PM", 8=>"9PM to 11PM"}
 %>
 <div class="view index">
 
-  <p>Bookings History</p>
+  <p>Bookings for room <%= @showing_for_room%></p>
   <br>
   <style>
     table, th, td{
@@ -22,21 +22,17 @@
   <table style = "width:100%" class="listing" summary="Subject list">
     <tr class="header">
 
-      <th>Room</th>
-
       <th>Date</th>
       <th>Time</th>
-      <th>Actions</th>
+      <th>Action</th>
     </tr>
-    <% @bookings.each do |booking| %>
+    <% @all_bookings.each do |booking| %>
         <tr>
-          <td><%= booking.room_number %></td>
 
           <td><%= booking.date %></td>
           <td><%= time_slots[booking.slot] %></td>
-          <td class="actions">
-            <%= link_to("Delete", {:controller => 'booking',:action => 'delete', :id => booking.id, :member_id=>@member_id}) %>
-          </td>
+          <td><</td>
+
         </tr>
     <% end %>
   </table>

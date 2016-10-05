@@ -6,7 +6,9 @@ class MembersController < ApplicationController
     @members = Member.all
   end
 
-
+  def show
+    @member=Member.find_by(:id=>params[:id])
+  end
   # GET /members/new
   def new
     @member = Member.new
@@ -50,7 +52,7 @@ class MembersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
   private
     def member_params
-      params.require(:member).permit(:name,:email_id, :password, :password_confirmation,:created_at)
+      params.require(:member).permit(:first_name,:last_name,:dob,:gender,:email_id, :password, :password_confirmation,:created_at)
     end
   end
 

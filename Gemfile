@@ -1,18 +1,19 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.2.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 
 gem 'rake', '~> 11.3'
 
-gem 'mysql2', '~> 0.3.18'
+gem 'mysql2', '~> 0.3.21'
 
 gem 'heroku', '~> 3.43', '>= 3.43.12'
 
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.7', '>= 2.7.2'

@@ -1,4 +1,5 @@
 <%= link_to("<< Back to List", {:action => 'search'}, :class => 'back-link') %>
+<%stylesheet_link_tag('application',:media=>'all')%>
 <h1>Search Results</h1>
 <!--<% if !flash[:notice].blank? %>
   <div class="notice">
@@ -8,10 +9,6 @@
 -->
 <div class="available rooms index">
 
-
-
-  <p>List of Available Rooms</p>
-  <br></br>
   <style>
     table, th, td{
       border: 1px solid black;

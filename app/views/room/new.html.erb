@@ -13,18 +13,18 @@
    <tr>
      <th>Building</th>
      <td>
-       <%= f.select "building", "<option> </option>
-                          <option >Hill</option>
-                          <option>Hunt</option>".html_safe %>
+       <%= f.select "building", "<option value=""> </option>
+                          <option value='D.H.Hill'>D.H.Hill</option>
+                          <option value='James.B.Hunt'>James.B.Hunt</option>".html_safe %>
      </td>
    </tr>
    <tr>
      <th>Size</th>
      <td>
        <%= f.select "size", "<option value = ""></option>
-                        <option value = 4>Small</option>
-                        <option value = 6>Medium</option>
-                        <option value = 12>Large</option>".html_safe %>
+                        <option value = 'Small(4-chairs)'>Small - 4 Chairs</option>
+                        <option value = 'Medium(6-chairs)'>Medium - 6 Chairs</option>
+                        <option value = 'Large(12-chairs)'>Large - 12 Chairs</option>".html_safe %>
      </td>
    </tr>
  </table>
