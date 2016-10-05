@@ -25,7 +25,7 @@ class MembersController < ApplicationController
     # Save the object
     if @member.save
       # If save succeeds, redirect to the index action
-      flash[:notice] = "Admin created successfully."
+      flash[:notice] = "Member created successfully."
       redirect_to(:controller => 'access', :action => 'login')
     else
       # If save fails, redisplay the form so user can fix problems
