@@ -4,7 +4,7 @@ class AdminController < ApplicationController
   
   def index
     current_user = session[:userid]
-    exclude_ids = [current_user,30]
+    exclude_ids = [current_user,1]
     @admins = Admin.where('id NOT IN (:ids)', ids: exclude_ids)
   end
 
