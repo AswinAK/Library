@@ -49,7 +49,8 @@ class AccessController < ApplicationController
     end
   else
     flash[:notice] = "Invalid username/password combination. Please go back and try again"
-    render action: 'show'
+    #render action: 'show'
+    render 'login'
   end
 end
 
