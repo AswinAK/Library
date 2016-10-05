@@ -18,6 +18,7 @@ class RoomController < ApplicationController
       redirect_to(:action => 'index')
     else
       # If save fails, redisplay the form so user can fix problems
+      flash[:error] = @room.errors.empty? ? "Error" : @room.errors.full_messages.to_sentence
       render('new')
     end
   end
