@@ -29,6 +29,7 @@ class MembersController < ApplicationController
       redirect_to(:controller => 'access', :action => 'login')
     else
       # If save fails, redisplay the form so user can fix problems
+      flash[:error] = @member.errors.empty? ? "Error" : @member.errors.full_messages.to_sentence
       render('new')
     end
   end
