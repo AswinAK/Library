@@ -29,10 +29,10 @@ class BookingController < ApplicationController
      #check if the same user has already booked another room for the same time and slot
       puts "Current user ID : ",params[:id2]
       booking=Booking.where(:slot => @slot,:date => @date, :email_id =>params[:id2])
-      if(booking.count>0)
+      if(booking.count>0 && !(Member.where(:id=> params[:id2]).first.permitted))
         puts "Booking failed."
         #user has already booked the room for the same time and date
-        flash[:notice]="You already have booked a room for the same time and date. Kindly delete that reservation first"
+        flash[:notice]="You already have booked a room for the same time and date.Kindly delete that reservation first or get permit from admin to book multiple rooms"
         redirect_to :action => "show_availability", :id=>@room_num
       end
     end
@@ -165,4 +165,5 @@ class BookingController < ApplicationController
       redirect_to action: "view_bookings" ,:id=>params[:member_id]
     end
   end
+
 end

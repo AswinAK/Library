@@ -61,9 +61,27 @@ class MembersController < ApplicationController
   # end
 
     # Only allow a trusted parameter "white list" through.
+
+
+  def permitUser
+    @member_permitted_name=Member.where(:id=>params[:id]).first.first_name
+    Member.update(params[:id], :permitted => 1)
+    flash[:notice] = "User #{@member_permitted_name} allowed to book multiple rooms"
+    redirect_to(:action => 'index' )
+  end
+
+  def revokePermit
+    @member_permitted_name=Member.where(:id=>params[:id]).first.first_name
+    Member.update(params[:id], :permitted => 0)
+    flash[:notice] = "User #{@member_permitted_name} revoked from booking multiple rooms"
+    redirect_to(:action => 'index' )
+  end
+
+
   private
     def member_params
       params.require(:member).permit(:first_name,:last_name,:dob,:gender,:email_id, :password, :password_confirmation,:created_at)
     end
+
   end
 
