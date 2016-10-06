@@ -43,7 +43,7 @@ HANDLING EDGE CASE SCENARIOS:
 
 Testing: 
 
-Testing has been implemented for all the dunctionalities of room model and room controller.
+Testing has been implemented for all the functionalities of room model and room controller.
 
 Version : Ruby 2.3.1 and Rails 4.2.1
 The App has been deployed on Heroku accessible on: https://library-reservation.herokuapp.com/
