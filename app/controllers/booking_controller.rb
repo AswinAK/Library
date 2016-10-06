@@ -63,6 +63,7 @@ class BookingController < ApplicationController
         # Change for email functionality
        
         emails = params[:emailids].split(';')
+        emails << params[:name]
         puts params[:emailids]
         puts emails.inspect
 
@@ -91,7 +92,8 @@ class BookingController < ApplicationController
       # Change for email functionality
         puts "in booking controller, about to call email"
         emails = params[:emailids].split(';')
-        
+      
+        emails << params[:name]  
 
         emails.each do |to_address|  
        
