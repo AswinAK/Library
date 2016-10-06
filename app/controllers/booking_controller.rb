@@ -48,7 +48,10 @@ class BookingController < ApplicationController
       #search for the mail id in the database to see if the user exists:
       if(Member.find_by(:email_id=> params[:name]).present?)
         #delete the old booking first BEFORE saving the new booking with the new user that admin entered
-        @deleted_booking=Booking.find_by(:id=>params[:booking_id]).destroy
+         @deleted_booking = Booking.find_by(:id=>params[:booking_id])
+         if(@deleted_booking.present?)
+            @deleted_booking.destroy
+         end
         #adding the booking
         booking = Booking.new
         booking.email_id = foundMember.id
