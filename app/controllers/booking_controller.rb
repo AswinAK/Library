@@ -93,8 +93,11 @@ class BookingController < ApplicationController
         puts "in booking controller, about to call email"
         emails = params[:emailids].split(';')
       
-        emails << params[:name]  
-
+       if(Member.find_by(:id=> params[:id2]).present?)
+          member_email = Member.where(:id => params[:id2]).first.email_id
+          emails << member_email
+       end
+      
         emails.each do |to_address|  
        
           ResvNotification.sample_email(session[:userName],booking,to_address).deliver
