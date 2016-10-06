@@ -8,7 +8,7 @@ class BookingController < ApplicationController
     #show all the bookings of  a particular room
     @all_bookings=Booking.where(:room_number=>params[:id])
     @showing_for_room=params[:id]
-    puts "All bookings: #{@all_bookings}"
+    
   end
 
   def book
@@ -18,19 +18,17 @@ class BookingController < ApplicationController
     @room_num=params[:id]
     if(@booking_status=="booked")
       booking=Booking.where(:slot => @slot,:date => @date, :room_number =>@room_num).first
-      puts booking.inspect
+     
       @booking_id=booking.id
       @booking_member_id=booking.email_id
       @booking_member_name= Member.find_by(:id=>@booking_member_id).first_name
-      puts "Booking status is "+@booking_status
-      puts "Member name" + @booking_member_name
-      puts session[:admin]
+     
     else
      #check if the same user has already booked another room for the same time and slot
       puts "Current user ID : ",params[:id2]
       booking=Booking.where(:slot => @slot,:date => @date, :email_id =>params[:id2])
       if(booking.count>0 && !(Member.where(:id=> params[:id2]).first.permitted))
-        puts "Booking failed."
+        
         #user has already booked the room for the same time and date
         flash[:notice]="You already have booked a room for the same time and date.Kindly delete that reservation first or get permit from admin to book multiple rooms"
         redirect_to :action => "show_availability", :id=>@room_num
@@ -43,17 +41,14 @@ class BookingController < ApplicationController
   end
 
   def confirmbooking
-    puts "************************************************Entered confirmbooking action 1"
+   
     if(session[:admin])
 
-      puts "************************************************Entered confirmbooking action 2"
       foundMember=Member.find_by(:email_id=> params[:name])
       #search for the mail id in the database to see if the user exists:
       if(Member.find_by(:email_id=> params[:name]).present?)
         #delete the old booking first BEFORE saving the new booking with the new user that admin entered
-        puts "This booking id will be deleted :"+params[:booking_id]
         @deleted_booking=Booking.find_by(:id=>params[:booking_id]).destroy
-        puts @deleted_booking
         #adding the booking
         booking = Booking.new
         booking.email_id = foundMember.id
@@ -63,16 +58,16 @@ class BookingController < ApplicationController
         booking.save
 
         # Change for email functionality
-        puts "in booking controller, about to call email"
+       
         emails = params[:emailids].split(';')
         puts params[:emailids]
         puts emails.inspect
 
         emails.each do |to_address|  
-          puts "Sending mail to "+to_address  
+          
           ResvNotification.sample_email(session[:userName],booking,to_address).deliver
         end
-        puts "in booking controller, after calling email"
+       
         # Change ends
 
         redirect_to :action=>"show_availability", :id=>params[:id]
@@ -93,14 +88,13 @@ class BookingController < ApplicationController
       # Change for email functionality
         puts "in booking controller, about to call email"
         emails = params[:emailids].split(';')
-        puts params[:emailids]
-        puts emails.inspect
+        
 
         emails.each do |to_address|  
-          puts "Sending mail to "+to_address  
+       
           ResvNotification.sample_email(session[:userName],booking,to_address).deliver
         end
-      puts "in booking controller, after calling email"
+
       # Change ends
 
       redirect_to :action=>"show_availability", :id=>params[:id]
@@ -110,13 +104,11 @@ class BookingController < ApplicationController
 
   end
   def list
-    puts "*********************************LIST action called";
+    
     loc = params[:location].to_s
     cap = params[:capacity].to_s
     room= params[:room_number_to_search].to_s
-    puts params[:location]
-    puts params[:capacity]
-    puts params[:room_number_to_search]
+   
     if(cap.size==0&&loc.size==0&&room.size==0)
       @rooms = Room.all
 
@@ -152,9 +144,9 @@ class BookingController < ApplicationController
     @bookings= Booking.where(room_number: params[:id])
     availablity=nil
     for date in Date.current..(Date.current+6)
-      puts "Date: "+date.to_s
+   
       for slot in 1..8
-        puts "Slot: "+slot.to_s
+   
 
 
         b= Booking.where(date: date, slot: slot, room_number: params[:id])
@@ -170,20 +162,20 @@ class BookingController < ApplicationController
         @slots_array.push(hash)
       end
     end
-    puts "Availability Array "+@slots_array.inspect
+  
 
   end
 
 
   def view_bookings
-    puts "in VIEW_BOOKINGS, user id is "+params[:id].to_s
+   
     @bookings = Booking.where(email_id: params[:id])
     @member_id= params[:id]
   end
 
   def delete
     del_id = params[:id]
-    puts "deleting booking ID: "+del_id.to_s
+ 
     b= Booking.find_by(id: del_id)
     b.destroy
     if(params[:id2]=="Room")
