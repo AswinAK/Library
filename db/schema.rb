@@ -13,39 +13,39 @@
 
 ActiveRecord::Schema.define(version: 20160925192155) do
 
-  create_table "admins", force: :cascade do |t|
-    t.string "email_id",        limit: 255, null: false
-    t.string "first_name",      limit: 255, null: false
-    t.string "last_name",       limit: 255, null: false
-    t.string "gender",          limit: 255, null: false
-    t.date   "dob",                         null: false
-    t.string "password_digest", limit: 255
+  create_table "admins", force: true do |t|
+    t.string "email_id",        null: false
+    t.string "first_name",      null: false
+    t.string "last_name",       null: false
+    t.string "gender",          null: false
+    t.date   "dob",             null: false
+    t.string "password_digest"
   end
 
-  create_table "bookings", force: :cascade do |t|
-    t.string   "email_id",    limit: 255, null: false
-    t.string   "room_number", limit: 255, null: false
-    t.integer  "slot",        limit: 4
+  create_table "bookings", force: true do |t|
+    t.string   "email_id",    null: false
+    t.string   "room_number", null: false
+    t.integer  "slot"
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "members", force: :cascade do |t|
-    t.string   "email_id",        limit: 255, null: false
-    t.string   "first_name",      limit: 255, null: false
-    t.string   "last_name",       limit: 255, null: false
-    t.string   "gender",          limit: 255, null: false
-    t.date     "dob",                         null: false
-    t.string   "password_digest", limit: 255
+  create_table "members", force: true do |t|
+    t.string   "email_id",        null: false
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
+    t.string   "gender",          null: false
+    t.date     "dob",             null: false
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.string   "room_number", limit: 255, null: false
-    t.string   "building",    limit: 255, null: false
-    t.string   "size",        limit: 255, null: false
+  create_table "rooms", force: true do |t|
+    t.string   "room_number", null: false
+    t.string   "building",    null: false
+    t.string   "size",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

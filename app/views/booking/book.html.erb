@@ -49,6 +49,18 @@
     	<td>Time: </td>
     	<td><%=   time_slots[params[:id3].to_i]    %><td>
     </tr>
+
+    <!-- Email functionality change-->
+    <tr>
+      <%if @booking_status=="available" || session[:admin] %>
+          <td>Invitations </td>
+          <td>Email ID: </td>
+          <td><%= text_field_tag(:emailids) %></td>
+          <td>(Enter email IDs seperated by ;)</td>
+      <%end%>
+    </tr>
+
+  <!--Change ends -->
     </table>
       <%if session[:admin]%>
           <div class="form-buttons">

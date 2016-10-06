@@ -34,9 +34,10 @@ class BookingController < ApplicationController
   end
 
   def confirmbooking
+    puts "************************************************Entered confirmbooking action 1"
     if(session[:admin])
 
-
+      puts "************************************************Entered confirmbooking action 2"
       foundMember=Member.find_by(:email_id=> params[:name])
       #search for the mail id in the database to see if the user exists:
       if(Member.find_by(:email_id=> params[:name]).present?)
@@ -51,6 +52,19 @@ class BookingController < ApplicationController
         booking.slot = params[:id3]
         booking.date = params[:id4]
         booking.save
+
+        # Change for email functionality
+        puts "in booking controller, about to call email"
+        emails = params[:emailids].split(';')
+        puts params[:emailids]
+        puts emails.inspect
+
+        emails.each do |to_address|  
+          puts "Sending mail to "+to_address  
+          ResvNotification.sample_email(session[:userName],booking,to_address).deliver
+        end
+        puts "in booking controller, after calling email"
+        # Change ends
 
         redirect_to :action=>"show_availability", :id=>params[:id]
 
@@ -67,6 +81,18 @@ class BookingController < ApplicationController
       booking.slot = params[:id3]
       booking.date = params[:id4]
       booking.save
+      # Change for email functionality
+        puts "in booking controller, about to call email"
+        emails = params[:emailids].split(';')
+        puts params[:emailids]
+        puts emails.inspect
+
+        emails.each do |to_address|  
+          puts "Sending mail to "+to_address  
+          ResvNotification.sample_email(session[:userName],booking,to_address).deliver
+        end
+      puts "in booking controller, after calling email"
+      # Change ends
 
       redirect_to :action=>"show_availability", :id=>params[:id]
 
@@ -75,6 +101,7 @@ class BookingController < ApplicationController
 
   end
   def list
+    puts "*********************************LIST action called";
     loc = params[:location].to_s
     cap = params[:capacity].to_s
     room= params[:room_number_to_search].to_s
@@ -154,3 +181,4 @@ class BookingController < ApplicationController
 
   end
 end
+#/Users/AswinAk/Documents/Rails/LATEST/LibraryPortal/app/controllers/booking_controller.rb
