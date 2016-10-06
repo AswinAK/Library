@@ -11,10 +11,10 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: LibraryManagement
+  database: LM
   pool: 5
   username: root
-  password: Rkb@0208_1994
+  password: secretpassword
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

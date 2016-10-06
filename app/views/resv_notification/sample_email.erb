@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <% time_slots = {1=>"7AM to 9AM",2=>"9AM to 11AM",3=>"11AM to 1PM",
+                 4=>"1PM to 3PM",5=>"3PM to 5PM",6=>"5PM to 7PM",7=>"7PM to  9PM", 8=>"9PM to 11PM"} %>
+    <h1>Hi, </h1>
+    
+     <b> Your team has made a reservation at the Library for a study room. </b>
+     </br>
+      Details of the reservation are as follows:
+      </br>
+      Room Number:   <%= @booking.room_number %>
+      </br>
+      Date:    <%= @booking.date %>
+      </br>
+      Time:   <%=  time_slots[@booking.slot]  %>
+      </br>
+      This reservation was made by <%= @booked_by %>
+      </br>
+      </br>
+      </br>
+      Sent from the Library Room Reservation System
+    
+  </body>
+</html>

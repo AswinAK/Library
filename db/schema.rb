@@ -32,12 +32,20 @@ ActiveRecord::Schema.define(version: 20160925192155) do
   end
 
   create_table "members", force: true do |t|
+<<<<<<< HEAD
     t.string   "email_id",                        null: false
     t.string   "first_name",                      null: false
     t.string   "last_name",                       null: false
     t.string   "gender",                          null: false
     t.date     "dob",                             null: false
     t.boolean  "permitted",       default: false, null: false
+=======
+    t.string   "email_id",        null: false
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
+    t.string   "gender",          null: false
+    t.date     "dob",             null: false
+>>>>>>> 95176b37bb5de5ee7b5dbd04d95dd5211052b538
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
