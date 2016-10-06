@@ -24,7 +24,7 @@
     </tr>
     <% @members.each do |member| %>
         <tr>
-          <td><%= member.first_name %></td>
+          <td><%= [member.first_name, member.last_name].join(" ") %></td>
           <td><%= member.email_id %></td>
           <td class="actions">
                   <%= link_to("Delete", {:controller => 'members',:action => 'delete', :id => member.id}) %>

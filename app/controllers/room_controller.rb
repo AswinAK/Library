@@ -24,8 +24,17 @@ class RoomController < ApplicationController
   end
 
   def delete
-    Room.find_by(:id=>params[:id]).destroy
-    redirect_to(:action => 'index')
+    @room_number_to_delete=Room.find_by(:id=>params[:id]).room_number
+    @room_booked = Booking.where(:room_number => @room_number_to_delete)
+    puts "ROOM BOOKED _ " ,@room_booked
+    if(@room_booked.count>0)
+      puts "The Room has reservations"
+      flash[:notice]="The room has been reserved by other user. Delete each reservations first and then delete the Room"
+      redirect_to(:action => 'show', :controller => 'booking',:id=>@room_number_to_delete)
+    else
+      Room.find_by(:id=>params[:id]).destroy
+      redirect_to(:action => 'index')
+    end
   end
 
   private

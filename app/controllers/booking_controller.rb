@@ -13,10 +13,10 @@ class BookingController < ApplicationController
 
   def book
     @booking_status = params[:id5]
+    @slot=params[:id3]
+    @date=params[:id4]
+    @room_num=params[:id]
     if(@booking_status=="booked")
-      @slot=params[:id3]
-      @date=params[:id4]
-      @room_num=params[:id]
       booking=Booking.where(:slot => @slot,:date => @date, :room_number =>@room_num).first
       puts booking.inspect
       @booking_id=booking.id
@@ -25,8 +25,17 @@ class BookingController < ApplicationController
       puts "Booking status is "+@booking_status
       puts "Member name" + @booking_member_name
       puts session[:admin]
+    else
+     #check if the same user has already booked another room for the same time and slot
+      puts "Current user ID : ",params[:id2]
+      booking=Booking.where(:slot => @slot,:date => @date, :email_id =>params[:id2])
+      if(booking.count>0)
+        puts "Booking failed."
+        #user has already booked the room for the same time and date
+        flash[:notice]="You already have booked a room for the same time and date. Kindly delete that reservation first"
+        redirect_to :action => "show_availability", :id=>@room_num
+      end
     end
-
   end
 
   def search
@@ -177,8 +186,11 @@ class BookingController < ApplicationController
     puts "deleting booking ID: "+del_id.to_s
     b= Booking.find_by(id: del_id)
     b.destroy
-    redirect_to action: "view_bookings" ,:id=>params[:member_id]
-
+    if(params[:id2]=="Room")
+      redirect_to action: "show", :id=>params[:room_number]
+    else
+      redirect_to action: "view_bookings" ,:id=>params[:member_id]
+    end
   end
 end
 #/Users/AswinAk/Documents/Rails/LATEST/LibraryPortal/app/controllers/booking_controller.rb

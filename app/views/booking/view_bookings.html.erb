@@ -35,7 +35,7 @@
           <td><%= booking.date %></td>
           <td><%= time_slots[booking.slot] %></td>
           <td class="actions">
-            <%= link_to("Delete", {:controller => 'booking',:action => 'delete', :id => booking.id, :member_id=>@member_id}) %>
+            <%= link_to("Delete", {:controller => 'booking',:action => 'delete', :id => booking.id, :member_id=>@member_id , :id2=>"Member"}) %>
           </td>
         </tr>
     <% end %>
