@@ -44,11 +44,21 @@ class MembersController < ApplicationController
     end
   end
 
-  # DELETE /members/1
-  def destroy
-    @member.destroy
-    redirect_to members_url, notice: 'Member was successfully destroyed.'
+  def delete
+    #check if the user has any reservations for any room -
+    # if yes, delete the reservations from the booking table as well
+    @all_bookings_of_member=Booking.where(:email_id=>params[:id]).destroy_all
+    @member_name=Member.where(:id=>params[:id]).first.first_name
+    puts "Member to be deleted:",@member_name
+    Member.destroy(Member.where(:id=> params[:id]))
+    flash[:notice] = "User #{@member_name} deleted successfully. All the bookings of user #{@member_name} are deleted automatically"
+    redirect_to(:action => 'index')
   end
+  # # DELETE /members/1
+  # def destroy
+  #   @member.destroy
+  #   redirect_to members_url, notice: 'Member was successfully destroyed.'
+  # end
 
     # Only allow a trusted parameter "white list" through.
   private
