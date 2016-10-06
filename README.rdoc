@@ -27,7 +27,7 @@ Member is given an option to edit his/her profile details.
 Functionality of sending email invitations for the booking is also given. In the booking confirmation page, the user can enter email IDs and invitations will be send to those email IDs. Entered email IDs seperated by ";". Email will also be sent to the member who has booked the room.
 
 
-Admin Functionalities:1
+Admin Functionalities:
 
 Administrators can login and perform administrative functions like creating rooms and other admins. 
 He will be given a view of all the users, rooms and admins and can easily manage them by clicking on appropriate links.
@@ -41,6 +41,9 @@ HANDLING EDGE CASE SCENARIOS:
 
 2. Deleting a member who has bookings: All the bookings for the user will be deleted and then the member will be deleted. Message will be displayed saying that the member has been deleted along with all his/her bookings.
 
+Testing: 
+
+Testing has been implemented for all the dunctionalities of room model and room controller.
 
 Version : Ruby 2.3.1 and Rails 4.2.1
 The App has been deployed on Heroku accessible on: https://library-reservation.herokuapp.com/
