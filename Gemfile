@@ -35,12 +35,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 #group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', '~> 0.4.1'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.1'
 #end
 
 # Use ActiveModel has_secure_password
- gem 'bcrypt-ruby', '~> 3.1.0'
+gem 'bcrypt-ruby', '~> 3.1.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -58,6 +58,6 @@ group :production do
 end
 
 group :development, :test do
-  
+
   gem 'byebug',  '9.0.0', platform: :mri
 end

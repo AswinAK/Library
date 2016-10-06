@@ -24,6 +24,7 @@ class AdminController < ApplicationController
       redirect_to(:action => 'index')
     else
       # If save fails, redisplay the form so user can fix problems
+      flash[:error] = @admin.errors.empty? ? "Error" : @admin.errors.full_messages.to_sentence
       render('new')
     end
   end
@@ -42,6 +43,7 @@ class AdminController < ApplicationController
       redirect_to(:controller => 'access', :action => 'admin_view')
     else
       # If update fails, redisplay the form so user can fix problems
+      flash[:error] = @admin.errors.empty? ? "Error" : @admin.errors.full_messages.to_sentence
       render('edit')
     end
   end

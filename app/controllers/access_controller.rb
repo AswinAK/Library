@@ -48,8 +48,9 @@ class AccessController < ApplicationController
       redirect_to(:action => 'member_view')
     end
   else
-    flash[:notice] = "Invalid username/password combination. Please go back and try again"
-    render action: 'show'
+    flash[:notice] = "Invalid username/password combination. Please try again"
+    #render action: 'show'
+    render 'login'
   end
 end
 
