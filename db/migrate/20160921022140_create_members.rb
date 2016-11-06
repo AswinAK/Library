@@ -6,7 +6,7 @@ class CreateMembers < ActiveRecord::Migration
       t.string "last_name" , null:false
       t.string "gender", null:false
       t.date "dob", null:false
-      t.boolean "permitted", default:0, null: false
+      t.boolean "permitted", default:false, null: false
       t.string "password_digest"
 
       t.timestamps
